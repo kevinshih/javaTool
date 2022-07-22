@@ -1,0 +1,29 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.1'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	id 'war'
+}
+
+group = 'javaTool'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'com.squareup.okhttp3:okhttp:3.3.1'
+	implementation 'org.junit.jupiter:junit-jupiter-engine:5.8.0-M1:test'
+	implementation 'org.jsoup:jsoup:1.15.2'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
