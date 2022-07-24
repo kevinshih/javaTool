@@ -22,6 +22,12 @@ dependencies {
 	implementation 'com.squareup.okhttp3:okhttp:3.3.1'
 	implementation 'org.junit.jupiter:junit-jupiter-engine:5.8.0-M1:test'
 	implementation 'org.jsoup:jsoup:1.15.2'
+	
+	// https://mvnrepository.com/artifact/commons-httpclient/commons-httpclient
+	implementation group: 'commons-httpclient', name: 'commons-httpclient', version: '3.1'
+	// https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
+	implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.2'
+	
 }
 
 tasks.named('test') {

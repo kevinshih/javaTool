@@ -8,13 +8,13 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
 
-class ReaderTest {
-    private Reader reader;
+class OkHttpClientReaderTest {
+    private OkHttpClientReader reader;
 
     @org.junit.jupiter.api.BeforeEach
     void setUp() {
         try {
-            reader = new Reader();
+            reader = new OkHttpClientReader();
         } catch (IOException e) {
             e.printStackTrace();
         }

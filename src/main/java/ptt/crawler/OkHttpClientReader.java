@@ -13,13 +13,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class Reader {
+public class OkHttpClientReader {
     private OkHttpClient okHttpClient;
-    private final Map<String, List<Cookie>> cookieStore; // 保存 Cookie
+    private final Map<String, List<Cookie>> cookieStore; // 保�?? Cookie
     private final CookieJar cookieJar;
 
-    public Reader() throws IOException {
-        /* 初始化 */
+    public OkHttpClientReader() throws IOException {
+        /* ??��?��?? */
         cookieStore = new HashMap<>();
         cookieJar = new CookieJar() {
             @Override
@@ -32,7 +32,7 @@ public class Reader {
                 cookieStore.put(httpUrl.host(), cookies);
             }
             
-            /* 每次發送帶上儲存的 Cookie */
+            /* 每次?��?�帶上儲存�?? Cookie */
             @Override
             public List<Cookie> loadForRequest(HttpUrl httpUrl) {
                 return cookieStore.getOrDefault(
@@ -43,7 +43,7 @@ public class Reader {
         };
         okHttpClient = new OkHttpClient.Builder().cookieJar(cookieJar).build();
 
-        /* 獲得網站的初始 Cookie */
+        /* ?��得網站�?��?��?? Cookie */
         Request request = new Request.Builder().get().url(Config.PTT_URL).build();
         okHttpClient.newCall(request).execute();
     }
@@ -51,17 +51,17 @@ public class Reader {
     public List<Article> getList(String boardName) throws IOException, ParseException {
         Board board = Config.BOARD_LIST.get(boardName);
 
-        /* 如果找不到指定的看板 */
+        /* 如�?�找不到??��?��?��?�板 */
         if (board == null) {
             return null;
         }
 
-        /* 如果看板需要成年檢查 */
+        /* 如�?��?�板??要�?�年檢查 */
         if (board.getAdultCheck() == true) {
             runAdultCheck(board.getUrl());
         }
 
-        /* 抓取目標頁面 */
+        /* ??��?�目標�?�面 */
         Request request = new Request.Builder()
             .url(Config.PTT_URL + board.getUrl())
             .get()
@@ -70,7 +70,7 @@ public class Reader {
         Response response = okHttpClient.newCall(request).execute();
         String body = response.body().string();
 
-        /* 轉換 HTML 到 Article */
+        /* 轉�?? HTML ?�� Article */
         List<Map<String, String>> articles = parseArticle(body);
         List<Article> result = new ArrayList<>();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd");
@@ -87,7 +87,7 @@ public class Reader {
         return result;
     }
 
-    /* 進行年齡確認 */
+    /* ?��?�年齡確�? */
     private void runAdultCheck(String url) throws IOException {
         FormBody formBody = new FormBody.Builder()
             .add("from", url)
@@ -102,7 +102,7 @@ public class Reader {
         okHttpClient.newCall(request).execute();
     }
 
-    /* 解析看板文章列表 */
+    /* �???��?�板??��?��?�表 */
     private List<Map<String, String>> parseArticle(String body) {
         List<Map<String, String>> result = new ArrayList<>();
         Document doc = Jsoup.parse(body);

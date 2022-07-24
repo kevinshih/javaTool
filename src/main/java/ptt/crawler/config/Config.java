@@ -5,7 +5,6 @@ import ptt.crawler.model.Board;
 import java.util.*;
 
 public final class Config {
-	HashMap a = new HashMap<>();
     public static final String PTT_URL = "https://www.ptt.cc";
     public static final Map<String, Board> BOARD_LIST = new HashMap<>();
         /*
@@ -16,9 +15,14 @@ public final class Config {
         */
     static {
     	BOARD_LIST.put("Gossiping", new Board(
-            "/bbs/Gossiping",
+            "/bbs/Gossiping/index.html",
             "八卦板",
             "Gossiping",
             true));
+    	BOARD_LIST.put("Stock", new Board(
+                "/bbs/Stock/index.html",
+                "股票板",
+                "Stock",
+                false));
     }
 }
